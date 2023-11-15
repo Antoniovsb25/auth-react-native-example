@@ -18,18 +18,19 @@ async function auth(mode, email, password) {
       endpoint = "";
       break;
   }
-  const reponse = await axios.post(endpoint, {
+  const response = await axios.post(endpoint, {
     email: email,
     password: password,
     returnSecureToken: true,
   });
-  console.log(reponse.data);
+  const token = response.data.idToken;
+  return token;
 }
 
-export async function createUser(email, password) {
-  await auth("signup", email, password);
+export function createUser(email, password) {
+  return auth("signup", email, password);
 }
 
-export async function login(email, password) {
-  await auth("login", email, password);
+export function login(email, password) {
+  return auth("login", email, password);
 }
